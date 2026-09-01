@@ -156,7 +156,7 @@ fn handle_edited(
         use colored::Colorize;
         let fmt_prev = format!("{previous:?}").red();
 
-        let fmt_tried = if !with_extension && let Some(ext) = file.path().extension() {
+        let tried = if !with_extension && let Some(ext) = file.path().extension() {
             PathBuf::new().with_file_name(tried).with_extension(ext)
         } else {
             PathBuf::new().with_file_name(tried)
@@ -166,9 +166,9 @@ fn handle_edited(
         .to_str()
         .unwrap()
         .to_string();
-        let fmt_tried = format!("{fmt_tried:?}").green();
+        let fmt_tried = format!("{tried:?}").green();
 
-        if previous == tried {
+        if previous == &tried {
             println!("{}", format!("[unchanged] {previous:?}").bright_black());
         } else {
             any_changes = true;
